@@ -69,10 +69,10 @@ export default function RegisterPage() {
 
           {/* Confirm Password */}
           <div className="flex flex-col gap-3">
-            <Label htmlFor="password">Confirm Password</Label>
+            <Label htmlFor="confirm-password">Confirm Password</Label>
             <Input
-              id="password"
-              type="password"
+              id="confirm-password"
+              type="confirm-password"
               placeholder="••••••••"
               autoComplete="current-password"
             />

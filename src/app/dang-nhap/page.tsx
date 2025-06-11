@@ -1,5 +1,5 @@
 "use client";
-
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,6 +8,7 @@ import Github from "@/components/icons/GithubIcon";
 import Google from "@/components/icons/GoogleIcon";
 
 export default function LoginPage() {
+  const router = useRouter();
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <div className="bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm w-full max-w-md">
@@ -70,7 +71,7 @@ export default function LoginPage() {
 
         {/* Card Footer */}
         <div className="px-6 flex flex-col gap-4">
-          <Button className="w-full">Sign in</Button>
+          <Button className="w-full" onClick={() => router.push("/")}>Sign in</Button>
           <p className="text-center text-sm text-muted-foreground">
             Don’t have an account?{" "}
             <Link
