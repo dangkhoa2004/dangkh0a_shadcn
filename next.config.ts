@@ -1,7 +1,15 @@
-import type { NextConfig } from "next";
-
+// next.config.ts
+import type { NextConfig } from 'next';
+import type { Configuration } from 'webpack';
 const nextConfig: NextConfig = {
-  allowedDevOrigins: ['http://192.168.1.3:3000'],
+  webpack(config: Configuration) {
+    config.module?.rules?.push({
+      test: /\.svg$/,
+      issuer: /\.[jt]sx?$/,
+      use: ['@svgr/webpack'],
+    });
+    return config;
+  },
 };
 
 export default nextConfig;

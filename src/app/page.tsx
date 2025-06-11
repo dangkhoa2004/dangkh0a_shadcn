@@ -1,3 +1,4 @@
+// src/app/page.tsx
 "use client";
 
 import Link from "next/link";
@@ -12,7 +13,7 @@ export default function Home() {
         <Button variant="default">Go to About</Button>
       </Link>
 
-      <Link href="/dashboard">
+      <Link href="/trang-chu">
         <Button variant="secondary">Go to Dashboard</Button>
       </Link>
 
