@@ -3,11 +3,11 @@
 import { AppSidebar } from "@/components/ui/app-sidebar";
 import { SiteHeader } from "@/components/ui/site-header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { ChartAreaInteractive } from "./trang-chu/components/chart-area-interactive";
-import { Calendar27 } from "./trang-chu/components/calendar-27";
-import { DataTableDemo } from "./trang-chu/components/table-data";
-import { CookieSettingsCard } from "./trang-chu/components/cookie-settings";
-import { UpgradeSubscriptionForm } from "./trang-chu/components/upgrade-subscription";
+import { ChartAreaInteractive } from "./(pages)/trang-chu/chart-area-interactive";
+import { Calendar27 } from "./(pages)/trang-chu/calendar-27";
+import { RepositoryTable } from "./(pages)/trang-chu/repository-table";
+import { CookieSettingsCard } from "./(pages)/trang-chu/cookie-settings";
+import { UpgradeSubscriptionForm } from "./(pages)/trang-chu/upgrade-subscription";
 
 export default function Page() {
   return (
@@ -22,10 +22,10 @@ export default function Page() {
 
           <SidebarInset>
             <div className="flex flex-1 flex-col gap-4 p-4">
-              {/* Section 1: Data Summary */}
+              {/* Section 1: Danh sách Repositories */}
               <div className="bg-muted/50 rounded-xl p-6">
-                <h2 className="text-lg font-semibold mb-4">Data Summary</h2>
-                <DataTableDemo />
+                <h2 className="text-lg font-semibold mb-4">Danh sách Repositories</h2>
+                <RepositoryTable />
               </div>
 
               {/* Section 2: Search Form and Content */}

@@ -75,6 +75,27 @@ export function Calendar27() {
     from: new Date(2025, 5, 5),
     to: new Date(2025, 5, 20),
   });
+
+  const [displayDateRange, setDisplayDateRange] =
+    React.useState<string>("June 2025");
+  React.useEffect(() => {
+    if (range?.from && range?.to) {
+      const formattedFrom = range.from.toLocaleDateString(undefined, {
+        day: "numeric",
+        month: "numeric",
+        year: "numeric",
+      });
+      const formattedTo = range.to.toLocaleDateString(undefined, {
+        day: "numeric",
+        month: "numeric",
+        year: "numeric",
+      });
+      setDisplayDateRange(`${formattedFrom} - ${formattedTo}`);
+    } else {
+      setDisplayDateRange("June 2025");
+    }
+  }, [range]);
+
   const filteredData = React.useMemo(() => {
     if (!range?.from && !range?.to) {
       return chartData;
@@ -82,7 +103,27 @@ export function Calendar27() {
 
     return chartData.filter((item) => {
       const date = new Date(item.date);
-      return date >= range.from! && date <= range.to!;
+      const from = range.from
+        ? new Date(
+            range.from.getFullYear(),
+            range.from.getMonth(),
+            range.from.getDate()
+          )
+        : null;
+      const to = range.to
+        ? new Date(
+            range.to.getFullYear(),
+            range.to.getMonth(),
+            range.to.getDate()
+          )
+        : null;
+      const itemDate = new Date(
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate()
+      );
+
+      return (!from || itemDate >= from) && (!to || itemDate <= to);
     });
   }, [range]);
 
@@ -98,9 +139,8 @@ export function Calendar27() {
             <PopoverTrigger asChild>
               <Button variant="outline">
                 <CalendarIcon />
-                {range?.from && range?.to
-                  ? `${range.from.toLocaleDateString()} - ${range.to.toLocaleDateString()}`
-                  : "June 2025"}
+                {/* Sử dụng state `displayDateRange` đã được định dạng trên client */}
+                {displayDateRange}
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto overflow-hidden p-0" align="end">
@@ -144,6 +184,8 @@ export function Calendar27() {
               minTickGap={20}
               tickFormatter={(value) => {
                 const date = new Date(value);
+                // Bạn có thể giữ "en-US" ở đây nếu chỉ muốn hiển thị số ngày,
+                // hoặc đổi sang undefined để dùng locale của trình duyệt.
                 return date.toLocaleDateString("en-US", {
                   day: "numeric",
                 });
@@ -155,7 +197,9 @@ export function Calendar27() {
                   className="w-[150px]"
                   nameKey="visitors"
                   labelFormatter={(value) => {
-                    return new Date(value).toLocaleDateString("en-US", {
+                    // Cần thống nhất locale ở đây nếu bạn muốn nó khớp với định dạng hiển thị.
+                    // Sử dụng undefined hoặc locale cụ thể như 'en-US'
+                    return new Date(value).toLocaleDateString(undefined, {
                       month: "short",
                       day: "numeric",
                       year: "numeric",
@@ -171,7 +215,7 @@ export function Calendar27() {
       <CardFooter className="border-t">
         <div className="text-sm">
           You had{" "}
-          <span className="font-semibold">{total.toLocaleString()}</span>{" "}
+          <span className="font-semibold">{total.toLocaleString("vi-VN")}</span>{" "}
           visitors for the month of June.
         </div>
       </CardFooter>
